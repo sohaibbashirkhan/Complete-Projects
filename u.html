@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive FAQ</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Additional custom styles */
+        .faq-header {
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #1CCC00; /* Adding the specified color */
+        }
+        .faq-question {
+            cursor: pointer;
+            color: #1CCC00; /* Adding the specified color */
+        }
+        .faq-answer {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="faq-header">Frequently Asked Questions</h1>
+        <h3 style="color: white; background-color: #1CCC00; padding: 10px; border-radius: 5px;">Community Guidelines</h3> <!-- Added header -->
+        <div class="faq-item">
+            <h5 class="faq-question" data-toggle="collapse" data-target="#answer1">What is your return policy?</h5>
+            <div id="answer1" class="collapse faq-answer">
+                <p>Our return policy allows returns within 30 days of purchase...</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h5 class="faq-question" data-toggle="collapse" data-target="#answer2">How can I track my order?</h5>
+            <div id="answer2" class="collapse faq-answer">
+                <p>You can track your order using the tracking link sent to your email...</p>
+            </div>
+        </div>
+        <div class="faq-item">
+            <h5 class="faq-question" data-toggle="collapse" data-target="#answer3">Do you offer international shipping?</h5>
+            <div id="answer3" class="collapse faq-answer">
+                <p>Yes, we offer international shipping to many countries...</p>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('.faq-question').click(function(){
+                var target = $(this).data('target');
+                $(target).collapse('toggle');
+            });
+        });
+    </script>
+</body>
+</html>
