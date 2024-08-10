@@ -5,5 +5,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class RentalSearch extends Model
 {
-    protected $fillable = ['city', 'car_type'];
+    protected $fillable = ['name', 'vehicle_type', 'city', 'image'];
 }

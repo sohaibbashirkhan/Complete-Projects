@@ -23,10 +23,12 @@ use App\Http\Controllers\YearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\BusController;
-use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\CarRentalController;
+use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\RentalSearchController;
-
+use App\Http\Controllers\PicnicController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -171,6 +173,7 @@ Route::get('/dashboard/user/account_setting',[UserController::class , 'account_s
 Route::get('/dashboard/vehicle_type',[Vehicle_TypeController::class , 'index']);
 Route::post('/dashboard/vehicle_type/add',[Vehicle_TypeController::class , 'add']);
 Route::post('/dashboard/vehicle_type/edit/{id}',[Vehicle_TypeController::class , 'edit']);
+Route::post('/dashboard/vehicle_type/update/{id}', [Vehicle_TypeController::class, 'update']);
 Route::post('/dashboard/vehicle_type/store',[VehiclesController::class , 'store']);
 Route::get('/dashboard/vehicle_type/delete/{id}',[Vehicle_TypeController::class , 'delete']);
 
@@ -203,9 +206,24 @@ Route::get('/dashboard/reset_password',[AuthController::class , 'reset_password'
 
 Route::get('/dashboard/auth/verify_email',[AuthController::class , 'verify_email']);
 
-
+Route::get('/search', [CarRentalController::class, 'search'])->name('search');
+Route::post('/rental-search', [CarRentalController::class, 'store'])->name('rental-search.store');
 Route::get('/cars/search', [CarController::class, 'search'])->name('cars.search');
-Route::post('/vehicle/store', [VehicleController::class, 'store'])->name('vehicle.store');
+Route::post('/vehicle/store', [VehiclesController::class, 'store'])->name('vehicle.store');
 Route::post('/buses/store', [BusController::class, 'store'])->name('buses.store');
-Route::post('/rental-search', [RentalSearchController::class, 'store'])->name('rental-search.store');
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::post('/search', [SearchController::class, 'store'])->name('search.store');
 Route::post('/bookings/store', [BookingController::class, 'store'])->name('bookings.store');
+// Route for the index page of rentacar
+Route::get('/rentacar', [BlogPostController::class, 'index'])->name('rentacar.index');
+
+// Route for showing a specific post
+Route::get('/post/{id}', [BlogPostController::class, 'show'])->name('post.show');
+Route::post('/rental-search', [RentalSearchController::class, 'store'])->name('rental-search.store');
+// Display the form (if you have a separate route for it)
+Route::get('/picnic-booking', function () {
+    return view('picnic-booking'); // Make sure this view exists
+});
+
+// Handle form submission
+Route::post('/picnics/store', [PicnicController::class, 'store'])->name('picnics.store');

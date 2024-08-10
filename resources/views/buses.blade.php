@@ -9,34 +9,19 @@
                 <div class="row">
                     <div class="col-md-12">
                         <h6>Next Ride</h6>
-                        <h1>Drive <span>Us</span></h1>
+                        <h1>Picnic & School <span>Bus </span></h1>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Booking Process -->
-    <section class="process section-padding">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-12 text-center mb-30">
-                    <div class="section-subtitle">Steps</div>
-                    <div class="section-title white">Car Rental <span>Process</span></div>
-                </div>
-            </div>
-            <div class="row">
-                <!-- Process steps here -->
-            </div>
-        </div>
-    </section>
-
     <!-- Booking Form -->
-    <section class="contact section">
+    <section class="contact section-padding">
         <div class="container">
             <div class="row">
                 <!-- Form -->
-                <div class="col-lg-6 col-md-12 mb-30">
+                <div class="col-lg-12 col-md-12 mb-30">
                     <div class="form-box">
                         <form method="POST" action="{{ route('buses.store') }}">
                             @csrf
@@ -48,7 +33,7 @@
                             @endif
 
                             <div class="row">
-                                <div class="section-title">Bus Booking <span>Form</span></div>
+                                <div class="section-title text-center">BUS  <span>BOOKING</span></div>
 
                                 <div class="col-md-6 form-group">
                                     <input name="name" type="text" placeholder="Your Name *" required>
@@ -63,11 +48,11 @@
                                 </div>
 
                                 <div class="col-md-6 form-group">
-                                    <input id="pickup_location" name="pickup_location" type="text" placeholder="Pick-Up Location *" required>
+                                    <input id="pickup_location" name="pickup_location" type="date" placeholder="Pick-Up Location *" required>
                                 </div>
 
                                 <div class="col-md-6 form-group">
-                                    <input id="dropoff_location" name="dropoff_location" type="text" placeholder="Drop-Off Location *" required>
+                                    <input id="dropoff_location" name="dropoff_location" type="date" placeholder="Drop-Off Location *" required>
                                 </div>
 
                                 <div class="col-md-6 form-group">
@@ -77,8 +62,10 @@
                                 <div class="col-md-6 form-group">
                                     <input name="dropoff_date" type="date" placeholder="Drop-Off Date *" required>
                                 </div>
-
                                 <div class="col-md-6 form-group">
+                                    <input name="dropoff_date" type="date" placeholder="Drop-Off Date *" required>
+                                </div>
+                                <div class="col-md-12 form-group">
                                     <select name="service_type" required>
                                         <option value="" disabled selected>Type of Service *</option>
                                         <option value="daily">Daily</option>
@@ -90,7 +77,7 @@
                                     <textarea name="comments" id="comments" cols="30" rows="4" placeholder="Additional Comments"></textarea>
                                 </div>
 
-                                <div class="col-md-12">
+                                <div class="col-md-12 text-center">
                                     <input name="submit" type="submit" value="Book Now">
                                 </div>
                             </div>
@@ -98,17 +85,7 @@
                     </div>
                 </div>
 
-                <!-- Contact Information -->
-                <div class="col-lg-6 col-md-12">
-                    <div class="info-box">
-                        <h5>Contact Information</h5>
-                        <ul>
-                            <li><span class="ti-location-pin"></span> 123 Street, City, Country</li>
-                            <li><span class="ti-mobile"></span> (123) 456-7890</li>
-                            <li><span class="ti-email"></span> example@domain.com</li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
         </div>
     </section>

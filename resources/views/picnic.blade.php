@@ -2,13 +2,13 @@
 
 @section('content')
 <!-- Header Banner -->
-<section class="banner-header middle-height section-padding bg-img" data-overlay-dark="6" data-background="{{asset('webasset/img/slider/4.jpg')}}">
+<section class="banner-header section-padding bg-img" data-overlay-dark="4" data-background="{{ asset('webasset/img/slider/3.jpg') }}">
     <div class="v-middle">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    <h6>Book Your Transport</h6>
-                    <h1>Choose Your Service</h1>
+                <div class="col-md-12">
+                    <h6>Next Ride</h6>
+                    <h1>Picnic Transport <span>Booking </span></h1>
                 </div>
             </div>
         </div>
@@ -16,88 +16,83 @@
 </section>
 
 <!-- Tabs -->
-<div class="container mt-5">
-    <ul class="nav nav-tabs" id="myTab" role="tablist">
-        <li class="nav-item" role="presentation">
-            <a class="nav-link active" id="register-tab" data-bs-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="true">Register Vehicle</a>
-        </li>
-        <li class="nav-item" role="presentation">
-            <a class="nav-link" id="book-tab" data-bs-toggle="tab" href="#book" role="tab" aria-controls="book" aria-selected="false">Book Ride</a>
-        </li>
-    </ul>
-    <div class="tab-content" id="myTabContent">
-        <div class="tab-pane fade show active" id="register" role="tabpanel" aria-labelledby="register-tab">
-            <!-- Register Vehicle Form -->
-            <div class="mt-4">
-                <h5>Register Your Vehicle</h5>
-                <form method="post" action="{{ route('vehicle.store') }}" enctype="multipart/form-data">
+<!-- Booking Form -->
+<section class="contact section-padding">
+    <div class="container">
+        <div class="row">
+            <!-- Form -->
+            <div class="col-lg-12 col-md-12 mb-30">
+                <div class="form-box">
+                <form method="POST" action="{{ route('picnics.store') }}">
                 @csrf
-                    <div class="form-group">
-                        <label for="driver_name">Driver Name</label>
-                        <input type="text" name="driver_name" id="driver_name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="photo_driver">Photo</label>
-                        <input type="file" name="photo_driver" id="photo_driver" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="vehicle_type">Vehicle Type</label>
-                        <input type="text" name="vehicle_type" id="vehicle_type" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="vehicle_model">Vehicle Model</label>
-                        <input type="text" name="vehicle_model" id="vehicle_model" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="license_plate">License Plate</label>
-                        <input type="text" name="license_plate" id="license_plate" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="color">Color</label>
-                        <input type="text" name="color" id="color" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Register Vehicle</button>
-                </form>
-            </div>
-        </div>
-        <div class="tab-pane fade" id="book" role="tabpanel" aria-labelledby="book-tab">
-            <!-- Book Ride Form -->
-            <div class="mt-4">
-                <h5>Book Your Ride</h5>
-                <form method="post" action="{{ route('bookings.store') }}">
-                @csrf
-                 <!-- Success Message -->
-                 @if (session('success'))
-                                <div class="alert alert-success" role="alert">
-                                    {{ session('success') }}
-                                </div>
-                            @endif
-                    <div class="form-group">
-                        <label for="pickupLocation">Customer Name </label>
-                        <input type="text" name="customer_Name" id="Customer_Name" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickupLocation">Pick-Up Location</label>
-                        <input type="text" name="pickup_location" id="pickupLocation" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dropoffLocation">Drop-Off Location</label>
-                        <input type="text" name="dropoff_location" id="dropoffLocation" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickupDate">Pick-Up Date</label>
-                        <input type="date" name="pickup_date" id="pickupDate" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pickupTime">Pick-Up Time</label>
-                        <input type="time" name="pickup_time" id="pickupTime" class="form-control" required>
-                    </div>
-                    <div class="col-md-12">
-                                    <input name="submit" type="submit" value="Ride Now">
-                                </div>                </form>
+                        <!-- Success Message -->
+                        @if (session('success'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        <div class="row">
+                            <div class="section-title text-center">PICNIC <span>BOOKING</span></div>
+
+                            <!-- Personal Information -->
+                            <div class="col-md-6 form-group">
+                                <input name="name" type="text" placeholder="Your Name *" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input name="email" type="email" placeholder="Your Email *" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input name="phone" type="text" placeholder="Your Phone Number *" required>
+                            </div>
+
+                            <!-- Picnic Details -->
+                            <div class="col-md-6 form-group">
+                                <input name="picnic_location" type="text" placeholder="Picnic Location *" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input name="picnic_date" type="date" placeholder="Picnic Date *" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input name="number_of_guests" type="number" placeholder="Number of Guests *" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input name="start_time" type="time" placeholder="Start Time *" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <input name="end_time" type="time" placeholder="End Time *" required>
+                            </div>
+
+                            <div class="col-md-12 form-group">
+                                <select name="service_type" required>
+                                    <option value="" disabled selected>Type of Service *</option>
+                                    <option value="standard">Standard</option>
+                                    <option value="luxury">Luxury</option>
+                                </select>
+                            </div>
+
+                            <!-- Additional Comments -->
+                            <div class="col-md-12 form-group">
+                                <textarea name="comments" id="comments" cols="30" rows="4" placeholder="Additional Comments"></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="col-md-12 text-center">
+                                <input name="submit" type="submit" value="Book Now">
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</section>
+
 
 @endsection
