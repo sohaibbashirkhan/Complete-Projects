@@ -4,39 +4,29 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateRidesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
         Schema::create('rides', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('customer_id');
-            $table->unsignedInteger('user_id');
-            $table->unsignedInteger('vehicle_id');
-            $table->string('start_location', 100);
-            $table->string('end_location',100);
-            $table->timestamp('start_time')->nullable();  /*start_time*/
-            $table->timestamp('end_time')->nullable();   /*end_time*/
-            $table->float('distance',100);
-            $table->decimal('fare',10,2);
-            $table->boolean('status');
+            $table->foreignId('customer_id')->constrained('users'); // Assuming 'users' table for customers
+            $table->foreignId('user_id')->constrained('users'); // Assuming 'users' table for drivers
+            $table->foreignId('vehicle_id')->constrained('vehicles'); // Assuming 'vehicles' table
+            $table->string('start_location');
+            $table->string('end_location');
+            $table->timestamp('start_time');
+            $table->timestamp('end_time');
+            $table->decimal('distance', 8, 2);
+            $table->decimal('fare', 8, 2);
+            $table->string('status');
             $table->timestamps();
             $table->softDeletes();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('rides');
     }
-};
+}

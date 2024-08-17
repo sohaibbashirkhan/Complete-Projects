@@ -29,6 +29,11 @@ use App\Http\Controllers\CarRentalController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\RentalSearchController;
 use App\Http\Controllers\PicnicController;
+use App\Http\Controllers\WalletController;
+use App\Http\Controllers\ManageAccountController;
+use App\Http\Controllers\PromotionController;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -60,6 +65,15 @@ Route::get('/custom-auth',function(){
     return view('errors.403');
 })->name('403');
 
+// wallet
+Route::get('/wallet', [WalletController::class, 'index'])->name('wallet.index');
+Route::post('/wallet/add-funds', [WalletController::class, 'addFunds'])->name('wallet.addFunds');
+Route::post('/wallet/withdraw-funds', [WalletController::class, 'withdrawFunds'])->name('wallet.withdrawFunds');
+Route::post('/wallet/pay-for-ride', [WalletController::class, 'payForRide'])->name('wallet.payForRide');
+
+// paymentorder
+Route::get('/admin/orders', [OrderController::class, 'index'])->name('admin.orders.index');
+Route::get('/admin/orders/{id}/generate-payment-link', [OrderController::class, 'generatePaymentLink'])->name('admin.orders.generatePaymentLink');
 
 // auth and register routees 
 
@@ -72,7 +86,10 @@ Route::get('/logout',[AuthController::class , 'logout'])->name('logout');
 
 // Dashboard Routes 
 Route::get('/dashboard',[DashboardController::class , 'index'])->middleware('admin');
-
+Route::middleware(['auth'])->group(function () {
+    Route::get('/account/manage', [ManageAccountController::class, 'index'])->name('account.manage');
+    Route::post('/account/manage', [ManageAccountController::class, 'update'])->name('account.update');
+});
 // Customer Routes
 Route::get('/dashboard/customer',[CustomerController::class , 'index']);
 Route::get('/dashboard/customer/add',[CustomerController::class , 'add']);
@@ -122,12 +139,15 @@ Route::post('/dashboard/payment/edit/{id}',[PaymentController::class , 'edit']);
 Route::post('/dashboard/payment/store',[PaymentController::class , 'store']);
 Route::get('/dashboard/payment/delete/{id}',[PaymentController::class , 'delete']);
 
-// Rating Routes
-Route::get('/dashboard/rating',[RatingController::class , 'index']);
-Route::post('/dashboard/rating/add',[RatingController::class , 'add']);
-Route::post('/dashboard/rating/edit/{id}',[RatingController::class , 'edit']);
-Route::post('/dashboard/rating/store',[RatingController::class , 'store']);
-Route::get('/dashboard/rating/delete/{id}',[RatingController::class , 'delete']);
+// // Rating Routes
+// Route::get('/dashboard/rating',[RatingController::class , 'index']);
+// Route::post('/dashboard/rating/add',[RatingController::class , 'add']);
+// Route::post('/dashboard/rating/edit/{id}',[RatingController::class , 'edit']);
+// Route::post('/dashboard/rating/store',[RatingController::class , 'store']);
+// Route::get('/dashboard/rating/delete/{id}',[RatingController::class , 'delete']);
+Route::get('/ratings/create/{rideId}', [RatingController::class, 'create'])->name('ratings.create');
+Route::post('/ratings', [RatingController::class, 'store'])->name('ratings.store');
+Route::get('/ratings', [RatingController::class, 'index'])->name('ratings.index');
 
 // Ride_Request Routes
 Route::get('/dashboard/ride_request',[Ride_RequestController::class , 'index']);
@@ -227,3 +247,9 @@ Route::get('/picnic-booking', function () {
 
 // Handle form submission
 Route::post('/picnics/store', [PicnicController::class, 'store'])->name('picnics.store');
+
+
+
+// promotion
+Route::get('/promotions', [PromotionController::class, 'index'])->name('promotions.index');
+Route::post('/promotions/apply', [PromotionController::class, 'apply'])->name('promotions.apply');

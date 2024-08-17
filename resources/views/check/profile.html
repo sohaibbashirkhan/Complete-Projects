@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        header {
+            background: #4CAF50;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            border-radius: 8px 8px 0 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 10px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        form {
+            margin-bottom: 20px;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        table th {
+            background-color: #f4f4f4;
+        }
+
+        #promo-message {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Profile</h1>
+            <nav>
+                <ul>
+                    <li><a href="#profile-info">Profile Info</a></li>
+                    <li><a href="#rides">My Rides</a></li>
+                    <li><a href="#wallet">Wallet</a></li>
+                    <li><a href="#promos">Promos</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <section id="profile-info">
+            <h2>Profile Information</h2>
+            <form id="profile-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" value="John Doe" required>
+                
+                <label for="email">Email:</label>
+                <input type="email" id="email" value="john.doe@example.com" required>
+                
+                <label for="phone">Phone:</label>
+                <input type="tel" id="phone" value="+1234567890" required>
+                
+                <button type="button" onclick="updateProfile()">Update Profile</button>
+            </form>
+        </section>
+
+        <section id="rides">
+            <h2>My Rides</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Start Location</th>
+                        <th>End Location</th>
+                        <th>Fare</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="rides-list">
+                    <!-- Rides will be dynamically added here -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="wallet">
+            <h2>Wallet</h2>
+            <p>Balance: $<span id="wallet-balance">100.00</span></p>
+            <button type="button" onclick="addFunds()">Add Funds</button>
+            <button type="button" onclick="withdrawFunds()">Withdraw Funds</button>
+        </section>
+
+        <section id="promos">
+            <h2>Promotional Offers</h2>
+            <form id="promo-form">
+                <label for="promo-code">Enter Promo Code:</label>
+                <input type="text" id="promo-code" placeholder="PROMO2024" required>
+                <button type="button" onclick="applyPromo()">Apply</button>
+            </form>
+            <p id="promo-message"></p>
+        </section>
+    </div>
+
+    <script>
+        // Sample data for rides
+        const rides = [
+            { date: '2024-08-01', startLocation: 'Point A', endLocation: 'Point B', fare: '25.00', status: 'Completed' },
+            { date: '2024-08-05', startLocation: 'Point C', endLocation: 'Point D', fare: '40.00', status: 'Pending' },
+        ];
+
+        // Populate rides table
+        document.addEventListener('DOMContentLoaded', () => {
+            const ridesList = document.getElementById('rides-list');
+            rides.forEach(ride => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${ride.date}</td>
+                    <td>${ride.startLocation}</td>
+                    <td>${ride.endLocation}</td>
+                    <td>$${ride.fare}</td>
+                    <td>${ride.status}</td>
+                `;
+                ridesList.appendChild(row);
+            });
+        });
+
+        function updateProfile() {
+            // Code to update profile
+            alert('Profile updated successfully.');
+        }
+
+        function addFunds() {
+            // Code to add funds
+            const balanceElement = document.getElementById('wallet-balance');
+            const currentBalance = parseFloat(balanceElement.textContent);
+            const amount = prompt('Enter amount to add:');
+            const newBalance = currentBalance + parseFloat(amount);
+            balanceElement.textContent = newBalance.toFixed(2);
+            alert('Funds added successfully.');
+        }
+
+        function withdrawFunds() {
+            // Code to withdraw funds
+            const balanceElement = document.getElementById('wallet-balance');
+            const currentBalance = parseFloat(balanceElement.textContent);
+            const amount = prompt('Enter amount to withdraw:');
+            if (amount > currentBalance) {
+                alert('Insufficient funds.');
+                return;
+            }
+            const newBalance = currentBalance - parseFloat(amount);
+            balanceElement.textContent = newBalance.toFixed(2);
+            alert('Funds withdrawn successfully.');
+        }
+
+        function applyPromo() {
+            // Code to apply promo code
+            const promoCode = document.getElementById('promo-code').value;
+            const promoMessage = document.getElementById('promo-message');
+            
+            if (promoCode === 'PROMO2024') {
+                promoMessage.textContent = 'Promo code applied: 20% off!';
+                promoMessage.style.color = 'green';
+            } else {
+                promoMessage.textContent = 'Invalid promo code. Please try again.';
+                promoMessage.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+</html>

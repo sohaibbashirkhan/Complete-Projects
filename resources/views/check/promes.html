@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            color: #333;
+        }
+        .promo-list, .apply-promo {
+            margin-bottom: 20px;
+        }
+        .promo-list h2, .apply-promo h2 {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .promo-list ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .promo-list li {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .apply-promo {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .apply-promo label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .apply-promo input[type="text"], .apply-promo button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .apply-promo button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .apply-promo button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+        }
+        .result p {
+            font-size: 1.2em;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Promotional Offers</h1>
+        </header>
+        
+        <!-- List of Promotions -->
+        <div class="promo-list">
+            <h2>Available Promotions</h2>
+            <ul id="promoList">
+                <!-- List items will be dynamically added here -->
+            </ul>
+        </div>
+        
+        <!-- Apply Promotion -->
+        <div class="apply-promo">
+            <h2>Apply Promo Code</h2>
+            <form id="applyPromoForm">
+                <label for="promoCode">Promo Code:</label>
+                <input type="text" id="promoCode" name="promoCode" required>
+                <button type="submit">Apply Code</button>
+                <div id="promoMessage"></div>
+            </form>
+        </div>
+        
+        <!-- Result -->
+        <div class="result">
+            <p id="resultMessage">Enter a promo code to see your discount.</p>
+        </div>
+    </div>
+
+    <script>
+        // Sample promotions data
+        const promotions = [
+            { code: 'DISCOUNT10', description: '10% off on your next ride', discount: 10 },
+            { code: 'RIDEFREE', description: 'Free ride up to $20', discount: 20 }
+        ];
+
+        // Display promotions
+        function displayPromotions() {
+            const promoList = document.getElementById('promoList');
+            promotions.forEach(promo => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `${promo.code}: ${promo.description}`;
+                promoList.appendChild(listItem);
+            });
+        }
+
+        // Handle form submission
+        document.getElementById('applyPromoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const promoCode = document.getElementById('promoCode').value.trim();
+            const promoMessage = document.getElementById('promoMessage');
+            const resultMessage = document.getElementById('resultMessage');
+
+            // Find the promotion
+            const promo = promotions.find(p => p.code === promoCode);
+
+            if (promo) {
+                promoMessage.textContent = `Applied! You get ${promo.discount}% off.`;
+                promoMessage.style.color = 'green';
+                resultMessage.textContent = `Congratulations! You have received a ${promo.discount}% discount.`;
+            } else {
+                promoMessage.textContent = 'Invalid promo code. Please try again.';
+                promoMessage.style.color = 'red';
+            }
+        });
+
+        // Initialize promotions on page load
+        document.addEventListener('DOMContentLoaded', displayPromotions);
+    </script>
+</body>
+</html>

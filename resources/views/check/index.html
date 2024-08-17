@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rate Your Ride</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            max-width: 400px;
+            width: 100%;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 128, 0, 0.2);
+            text-align: center;
+        }
+        h2 {
+            color: #006400;
+            margin-bottom: 20px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        .star-rating {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .star-rating input {
+            display: none;
+        }
+        .star-rating label {
+            font-size: 2.5em;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        .star-rating input:checked ~ label {
+            color: #32CD32;
+        }
+        .star-rating label:hover,
+        .star-rating label:hover ~ label {
+            color: #32CD32;
+        }
+        button {
+            background-color: #008000;
+            border: none;
+            color: white;
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #006400;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Rate Your Ride</h2>
+    <p>How was your ride with <strong>Driver Name</strong>?</p>
+
+    <form action="submit_rating.php" method="POST">
+        <div class="form-group">
+            <div class="star-rating">
+                <input type="radio" name="rating" value="5" id="5">
+                <label for="5">&#9733;</label>
+                <input type="radio" name="rating" value="4" id="4">
+                <label for="4">&#9733;</label>
+                <input type="radio" name="rating" value="3" id="3">
+                <label for="3">&#9733;</label>
+                <input type="radio" name="rating" value="2" id="2">
+                <label for="2">&#9733;</label>
+                <input type="radio" name="rating" value="1" id="1">
+                <label for="1">&#9733;</label>
+            </div>
+        </div>
+
+        <button type="submit">Submit Rating</button>
+    </form>
+</div>
+
+</body>
+</html>

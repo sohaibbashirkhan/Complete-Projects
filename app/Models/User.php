@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -41,4 +40,36 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Get the customer record associated with the user.
+     */
+    public function customer()
+    {
+        return $this->hasOne(Customer::class);
+    }
+
+    /**
+     * Get the driver record associated with the user.
+     */
+    public function driver()
+    {
+        return $this->hasOne(Driver::class);
+    }
+
+    /**
+     * Determine if the user is a customer.
+     */
+    public function isCustomer()
+    {
+        return $this->customer()->exists();
+    }
+
+    /**
+     * Determine if the user is a driver.
+     */
+    public function isDriver()
+    {
+        return $this->driver()->exists();
+    }
 }

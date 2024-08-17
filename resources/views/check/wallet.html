@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        header h1 {
+            color: #333;
+        }
+        .wallet-info, .ride-history {
+            margin-bottom: 20px;
+        }
+        .wallet-info h2, .ride-history h2 {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .wallet-info p, .ride-history table {
+            margin: 15px 0;
+        }
+        .wallet-info p {
+            font-size: 1.2em;
+            color: #555;
+        }
+        .ride-history table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .ride-history table, .ride-history th, .ride-history td {
+            border: 1px solid #ddd;
+        }
+        .ride-history th, .ride-history td {
+            padding: 10px;
+            text-align: left;
+        }
+        .ride-history th {
+            background-color: #f4f4f4;
+        }
+        .add-funds {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .add-funds h3 {
+            margin-bottom: 15px;
+        }
+        .add-funds label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .add-funds input[type="number"], .add-funds button {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+        .add-funds button {
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .add-funds button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Wallet Management</h1>
+        </header>
+        
+        <!-- Wallet Information -->
+        <div class="wallet-info">
+            <h2>Wallet Balance</h2>
+            <p id="walletBalance">$00.00</p>
+        </div>
+        
+        <!-- Ride History -->
+        <div class="ride-history">
+            <h2>Ride History</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ride ID</th>
+                        <th>Date</th>
+                        <th>Start Location</th>
+                        <th>End Location</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>001</td>
+                        <td>2024-08-15</td>
+                        <td>Main Street</td>
+                        <td>Market Square</td>
+                        <td>$20.00</td>
+                    </tr>
+                    <tr>
+                        <td>002</td>
+                        <td>2024-08-16</td>
+                        <td>Elm Street</td>
+                        <td>City Center</td>
+                        <td>$35.00</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Add Funds -->
+        <div class="add-funds">
+            <h3>Add Funds to Wallet</h3>
+            <form id="addFundsForm">
+                <label for="amount">Amount ($):</label>
+                <input type="number" id="amount" name="amount" min="1" required>
+                <button type="submit">Add Funds</button>
+                <div id="formMessage"></div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('addFundsForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var amount = document.getElementById('amount').value;
+            var formMessage = document.getElementById('formMessage');
+
+            // Simple validation
+            if (amount <= 0) {
+                formMessage.textContent = 'Please enter a valid amount.';
+                formMessage.style.color = 'red';
+                return;
+            }
+
+            // Simulate adding funds
+            var currentBalance = parseFloat(document.getElementById('walletBalance').textContent.replace('$', ''));
+            var newBalance = currentBalance + parseFloat(amount);
+            document.getElementById('walletBalance').textContent = '$' + newBalance.toFixed(2);
+            formMessage.textContent = 'Funds added successfully!';
+            formMessage.style.color = 'green';
+        });
+    </script>
+</body>
+</html>
